@@ -53,3 +53,61 @@ server.listen(port, () => {
         res.status(500).json({ errorMessage: "There was an error while saving the user to the database." })
     })
  })
+
+//delete user -- delete request
+
+server.delete(`/api/users/:id`, (req, res) => {
+   const id = req.params.id
+    Db.remove(id)
+    .then(deleted => {
+        if(deleted){
+            res.status(204).end()
+        } else {
+            res.status(404).json( { message: "The user with the specified ID does not exist." } )
+        }
+    })
+    .catch(err => {
+        res.status(500).json({ errorMessage: "The user could not be removed." })
+    })
+})
+
+//update user -- put request
+
+server.put(`/api/users/:id`, (req, res) => {
+   const { name, bio } = req.body;
+
+    const id = req.params.id
+    //  if(!name || !bio) {
+    //      return res.status(400).json({ errorMessage: "Please provide name and bio for the user." })
+    //  }
+    Db.update(id,{ name, bio })
+    .then(updated => {
+        if(!name || !bio){
+            return res.status(400).json({ errorMessage: "Please provide name and bio for the user." })
+        } else {
+            return res.status(200).json(updated)
+        }
+        
+    })
+    .catch(err => {
+        res.status(500).json({ errorMessage: "The user information could not be modified." })
+    })
+
+     // const requestId = req.params.id;
+
+    // let user = users.filter(user => {
+    //     return user.id == requestId;
+    // })[0];
+
+    // const index = users.indexOf(user);
+
+    // const keys = Object.keys(req.body)
+
+    // keys.forEach(key => {
+    //     user[key] = req.body[key]
+    // })
+
+    // user[index] = user;
+    
+    // res.json(user[index])
+})
