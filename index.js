@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require("express");
 const server = express();
 const Db = require("./data/db");
-const port = 5000;
+// const port = 5000;
 
 const port = process.env.PORT || 5000
 
@@ -92,24 +92,6 @@ server.put(`/api/users/:id`, (req, res) => {
     .catch(err => {
         res.status(500).json({ errorMessage: "The user information could not be modified." })
     })
-
-     // const requestId = req.params.id;
-
-    // let user = users.filter(user => {
-    //     return user.id == requestId;
-    // })[0];
-
-    // const index = users.indexOf(user);
-
-    // const keys = Object.keys(req.body)
-
-    // keys.forEach(key => {
-    //     user[key] = req.body[key]
-    // })
-
-    // user[index] = user;
-    
-    // res.json(user[index])
 })
 
 server.listen(port, () => {
