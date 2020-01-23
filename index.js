@@ -10,9 +10,6 @@ const port = process.env.PORT || 5000
 
 server.use(express.json());
 
-server.listen(port, () => {
-    console.log(`running on port ${port}`)
-})
 
  //getting all users -- get request
 
@@ -113,4 +110,8 @@ server.put(`/api/users/:id`, (req, res) => {
     // user[index] = user;
     
     // res.json(user[index])
+})
+
+server.listen(port, () => {
+    console.log(`running on port ${port}`)
 })
