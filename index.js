@@ -1,15 +1,18 @@
 // implement your API here
+require('dotenv').config()
 const express = require("express");
 const server = express();
 const Db = require("./data/db");
 const port = 5000;
 
+const port = process.env.PORT || 5000
+
 
 server.use(express.json());
 
 server.listen(port, () => {
-    console.log(`api is running on port ${port}`)
- })
+    console.log(`running on port ${port}`)
+})
 
  //getting all users -- get request
 
