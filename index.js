@@ -43,7 +43,7 @@ server.listen(port, () => {
      const { name, bio } = req.body
 
      if(!name || !bio) {
-         return res.status(500).json({ errorMessage: "Please provide name and bio for the user." })
+         return res.status(400).json({ errorMessage: "Please provide name and bio for the user." })
      }
     Db.insert({ name, bio })
     .then(createUser => {
